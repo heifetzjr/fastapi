@@ -1,0 +1,82 @@
+# ===========================
+# Ambientes Virtuais
+# ===========================
+env/
+.env/
+venv/
+.venv/
+
+# ===========================
+# Python
+# ===========================
+__pycache__/
+*.py[cod]        # .pyc, .pyo, .pyd
+*.pdb            # Arquivos de debug
+*.egg-info/
+dist/
+build/
+*.egg
+
+# ===========================
+# Type Checking
+# ===========================
+.mypy_cache/
+.pytype/       # Verificador de tipos do Google
+.pyre/         # Verificador de tipos do Facebook
+
+# ===========================
+# Variáveis de Ambiente e Segredos
+# ===========================
+.env             # Nunca suba senhas, tokens e chaves de API!
+.env.local
+.env.production
+*.key
+*.pem
+
+# ===========================
+# Django
+# ===========================
+*.sqlite3        # Banco de dados local
+media/           # Arquivos enviados pelos usuários
+staticfiles/     # Arquivos estáticos coletados (collectstatic)
+local_settings.py
+
+# ===========================
+# FastAPI / Uvicorn
+# ===========================
+*.db             # Banco SQLite gerado pelo SQLAlchemy, etc.
+
+# ===========================
+# IDEs e Editores
+# ===========================
+.idea/           # PyCharm, IntelliJ
+.vscode/         # VSCode (settings pessoais)
+*.swp            # Vim
+*.swo
+.DS_Store        # macOS
+
+# ===========================
+# Testes e Cobertura
+# ===========================
+.coverage
+htmlcov/
+.pytest_cache/
+.tox/
+
+# ===========================
+# Logs
+# ===========================
+*.log
+logs/
+
+# ===========================
+# Docker
+# ===========================
+*.env.docker
+
+# ===========================
+# Node (se tiver frontend)
+# ===========================
+node_modules/
+dist/
+.next/

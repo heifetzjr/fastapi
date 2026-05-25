@@ -14,10 +14,18 @@ Você mais vai usar:
 500 – erro inesperado do servidor
 """
 from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import Optional
 
 app = FastAPI()
 
 livros: dict[int, dict[str, str]] = {}
+
+
+class Livro(BaseModel):
+    titulo: str
+    autor: str
+    ano: int
 
 
 @app.get("/livros")
@@ -28,26 +36,26 @@ def get_livros() -> dict:
 
 
 @app.post("/adicionar-livro")
-def post_livro(titulo: str, autor: str) -> dict:
-    if not titulo or not autor:
+def post_livro(livro: Livro) -> dict:
+    if not livro:
         raise HTTPException(status_code=400, detail="Título e autor são obrigatórios")
-    if any(livro["titulo"] == titulo for livro in livros.values()):
+    if any(liv["titulo"] == livro.titulo for liv in livros.values()):
         raise HTTPException(status_code=400, detail="Livro já existe")
 
     id_livro = max(livros.keys()) + 1 if livros else 1
-    livros[id_livro] = {"titulo": titulo, "autor": autor}
-    return {"id": id_livro, "titulo": titulo, "autor": autor}
+    livros[id_livro] = livro.model_dump()
+    return {"id": id_livro, "livro": livro}
 
 
 @app.put("/atualizar-livro/{id_livro}")
-def put_livro(id_livro: int, titulo: str, autor: str) -> dict:
+def put_livro(id_livro: int, livro: Livro) -> dict:
     if id_livro not in livros:
         raise HTTPException(status_code=404, detail="Livro não encontrado")
-    if not titulo or not autor:
+    if not livro:
         raise HTTPException(status_code=400, detail="Título e autor são obrigatórios")
 
-    livros[id_livro] = {"titulo": titulo, "autor": autor}
-    return {"id": id_livro, "titulo": titulo, "autor": autor}
+    livros[id_livro] = livro.model_dump()
+    return {"id": id_livro, "livro": livro}
 
 
 @app.delete("/deletar-livro/{id_livro}")

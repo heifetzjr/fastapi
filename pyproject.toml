@@ -1,7 +1,7 @@
 [project]
 name = "fastapi_backend"
 version = "0.1.0"
-description = "Iniciando os estudos com fastapi na plataforma EBAC"
+description = "backend usando o framework fastapi"
 authors = [
     {name = "Antonio Bernardo Dos Santos Junior",email = "bernardojunior.ccb@gmail.com"}
 ]
